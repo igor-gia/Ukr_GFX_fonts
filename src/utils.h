@@ -1,10 +1,15 @@
 #pragma once
+#include <Arduino.h>
 #include <stdint.h>
 #include <string.h>
 #include <stdbool.h>
 
 #define MAX_STRING 270  // ограничиваем строку шириной экрана
 
+// Глобальный буфер для преобразованных строк
+char target[MAX_STRING + 1] = "";
+
+// Таблица замены UTF-8 -> код шрифта
 struct UTF8Replace {
     uint8_t firstByte;    // первый байт UTF-8
     uint8_t secondByte;   // второй байт UTF-8
@@ -25,16 +30,16 @@ const UTF8Replace replacements[] = {
 };
 const int replacementsCount = sizeof(replacements) / sizeof(replacements[0]);
 
-// Функция преобразования строки UTF-8 в коды шрифта
-// buf — буфер для результата, должен быть размером не меньше MAX_STRING+1
-inline char* utf8rus2(const char* source, char* buf) {
+// Функция преобразования UTF-8 строки в коды шрифта
+inline char* utf8rus2(const char* source) {
+    strcpy(target, "");  // очищаем буфер
     int i = 0, j = 0;
     while (source[i] && j < MAX_STRING) {
-        uint8_t first = source[i++];
-        uint8_t n = first;
+        unsigned char first = source[i++];
+        unsigned char n = first;
 
         if (first >= 127) {  // двухбайтовый UTF-8
-            uint8_t second = source[i++];
+            unsigned char second = source[i++];
             bool replaced = false;
             for (int k = 0; k < replacementsCount; k++) {
                 if (replacements[k].firstByte == first && replacements[k].secondByte == second) {
@@ -48,8 +53,8 @@ inline char* utf8rus2(const char* source, char* buf) {
             }
         }
 
-        buf[j++] = n;
+        target[j++] = n;
     }
-    buf[j] = '\0';
-    return buf;
+    target[j] = '\0';
+    return target;
 }
