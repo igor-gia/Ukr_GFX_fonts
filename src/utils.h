@@ -3,37 +3,37 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define MAX_STRING 270  // ограничиваем строку шириной экрана
+#define MAX_STRING 270  // РѕРіСЂР°РЅРёС‡РёРІР°РµРј СЃС‚СЂРѕРєСѓ С€РёСЂРёРЅРѕР№ СЌРєСЂР°РЅР°
 
 struct UTF8Replace {
-    uint8_t firstByte;    // первый байт UTF-8
-    uint8_t secondByte;   // второй байт UTF-8
-    uint8_t replacement;  // код для шрифта
+    uint8_t firstByte;    // РїРµСЂРІС‹Р№ Р±Р°Р№С‚ UTF-8
+    uint8_t secondByte;   // РІС‚РѕСЂРѕР№ Р±Р°Р№С‚ UTF-8
+    uint8_t replacement;  // РєРѕРґ РґР»СЏ С€СЂРёС„С‚Р°
 };
 
 const UTF8Replace replacements[] = {
-    {208, 129, 192},  // Ё
-    {209, 145, 193},  // ё
-    {208, 132, 194},  // Є
-    {209, 148, 195},  // є
-    {208, 134, 196},  // І
-    {209, 150, 197},  // і
-    {208, 135, 198},  // Ї
-    {209, 151, 199},  // ї
-    {210, 144, 200},  // Ґ
-    {210, 145, 201}   // ґ
+    {208, 129, 192},  // РЃ
+    {209, 145, 193},  // С‘
+    {208, 132, 194},  // Р„
+    {209, 148, 195},  // С”
+    {208, 134, 196},  // Р†
+    {209, 150, 197},  // С–
+    {208, 135, 198},  // Р‡
+    {209, 151, 199},  // С—
+    {210, 144, 200},  // Тђ
+    {210, 145, 201}   // Т‘
 };
 const int replacementsCount = sizeof(replacements) / sizeof(replacements[0]);
 
-// Функция преобразования строки UTF-8 в коды шрифта
-// buf — буфер для результата, должен быть размером не меньше MAX_STRING+1
+// Р¤СѓРЅРєС†РёСЏ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ СЃС‚СЂРѕРєРё UTF-8 РІ РєРѕРґС‹ С€СЂРёС„С‚Р°
+// buf вЂ” Р±СѓС„РµСЂ РґР»СЏ СЂРµР·СѓР»СЊС‚Р°С‚Р°, РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ СЂР°Р·РјРµСЂРѕРј РЅРµ РјРµРЅСЊС€Рµ MAX_STRING+1
 inline char* utf8rus2(const char* source, char* buf) {
     int i = 0, j = 0;
     while (source[i] && j < MAX_STRING) {
         uint8_t first = source[i++];
         uint8_t n = first;
 
-        if (first >= 127) {  // двухбайтовый UTF-8
+        if (first >= 127) {  // РґРІСѓС…Р±Р°Р№С‚РѕРІС‹Р№ UTF-8
             uint8_t second = source[i++];
             bool replaced = false;
             for (int k = 0; k < replacementsCount; k++) {
@@ -44,7 +44,7 @@ inline char* utf8rus2(const char* source, char* buf) {
                 }
             }
             if (!replaced) {
-                n = second;  // используем второй байт как индекс шрифта
+                n = second;  // РёСЃРїРѕР»СЊР·СѓРµРј РІС‚РѕСЂРѕР№ Р±Р°Р№С‚ РєР°Рє РёРЅРґРµРєСЃ С€СЂРёС„С‚Р°
             }
         }
 
