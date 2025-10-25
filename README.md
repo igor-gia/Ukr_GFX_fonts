@@ -101,3 +101,7 @@ gfx->print(String(utf8rus2(msg.c_str())));
 ### Ліцензія
 
 MIT License — вільне використання, модифікація та розповсюдження. Детальніше у файлі `LICENSE`.
+
+## Keywords
+
+Ukrainian, GFX, Adafruit, Arduino, fonts, UTF-8, display, text, Тahoma, Cambria, FreeSans
