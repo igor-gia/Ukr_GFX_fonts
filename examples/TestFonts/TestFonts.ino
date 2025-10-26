@@ -1,6 +1,6 @@
 #include <Arduino_GFX_Library.h>
 #include <utils.h>
-#include <tahomaUkr12.h>
+#include <fonts/tahomaUkr12.h>
 
 #define GFX_BL 21  // пин подсветки
 
