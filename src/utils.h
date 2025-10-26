@@ -31,7 +31,7 @@ const UTF8Replace replacements[] = {
 const int replacementsCount = sizeof(replacements) / sizeof(replacements[0]);
 
 // Функция преобразования UTF-8 строки в коды шрифта
-inline char* utf8rus2(const char* source) {
+inline char* Utf8win1251(const char* source) {
     strcpy(target, "");  // очищаем буфер
     int i = 0, j = 0;
     while (source[i] && j < MAX_STRING) {
@@ -58,3 +58,4 @@ inline char* utf8rus2(const char* source) {
     target[j] = '\0';
     return target;
 }
+
