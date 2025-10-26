@@ -34,7 +34,7 @@
 
 
 - **Conversion function**:  
-  - `utf8rus2(const char* source)` — converts a UTF-8 string into font codes using a replacement table.  
+  - `Utf8win1251(const char* source)` — converts a UTF-8 string into font codes using a replacement table.  
   - Used to display Ukrainian letters via GFX.
 
 ### Usage
@@ -116,7 +116,7 @@ MIT License — free to use, modify, and distribute. See `LICENSE` for details.
 
 
 - **Функція перетворення**:  
-  - `utf8rus2(const char* source)` — перетворює UTF-8 рядок у коди шрифта, використовуючи таблицю замін.  
+  - `Utf8win1251(const char* source)` — перетворює UTF-8 рядок у коди шрифта, використовуючи таблицю замін.  
   - Використовується для відображення українських символів через GFX.
 
 ### Підключення
