@@ -32,7 +32,7 @@ void setup() {
   gfx->setTextColor(0xFFFF, 0x0000);
   gfx->setFont(&tahomaUkr12);
   gfx->setCursor(0, 20);
-  gfx->print(String(utf8rus2(msg.c_str())));
+  gfx->print(String(Utf8win1251(msg.c_str())));
 
 }
 
