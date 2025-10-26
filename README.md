@@ -53,7 +53,7 @@ Example of printing Ukrainian text:
 String msg = "Привіт Ґ!";
 gfx->setFont(&tahomaUkr12);
 gfx->setCursor(0, 20);
-gfx->print(String(utf8rus2(msg.c_str())));
+gfx->print(String(Utf8win1251(msg.c_str())));
 ```
 
 ### Demo Sketch
@@ -137,7 +137,7 @@ MIT License — free to use, modify, and distribute. See `LICENSE` for details.
 String msg = "Привіт Ґ!";
 gfx->setFont(&tahomaUkr12);
 gfx->setCursor(0, 20);
-gfx->print(String(utf8rus2(msg.c_str())));
+gfx->print(String(Utf8win1251(msg.c_str())));
 ```
 
 ### Приклад
