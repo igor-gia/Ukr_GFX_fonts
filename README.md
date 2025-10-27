@@ -44,7 +44,7 @@ Example of including the library and font:
 ```cpp
 #include <Arduino_GFX_Library.h>
 #include <utils.h>
-#include <tahomaUkr12.h> // desired font
+#include <fonts/tahomaUkr12.h> // desired font
 ```
 
 Example of printing Ukrainian text:
@@ -126,7 +126,7 @@ MIT License — free to use, modify, and distribute. See `LICENSE` for details.
 ```cpp
 #include <Arduino_GFX_Library.h>
 #include <utils.h>
-#include <tahomaUkr12.h> // потрібний шрифт
+#include <fonts/tahomaUkr12.h> // потрібний шрифт
 ```
 
 ### Використання
