@@ -30,7 +30,7 @@
 
 > **Note 1:** Suffixes `i`, `b`, or `z` in a font file name indicate **italic**, **bold**, or **italic bold** style.  
 > **Note 2:** The number in the font file name indicates the **font size**.  
-> **Note 3:** At small font sizes, minor visual artifacts may appear. You can adjust fonts using online tools like the [Adafruit GFX Pixel Font Customiser](https://oleddisplay.squix.ch/#/home).
+> **Note 3:** At small font sizes, minor visual artifacts may appear. You can adjust fonts using online tools like the [Adafruit GFX Pixel Font Customiser](https://tchapi.github.io/Adafruit-GFX-Font-Customiser/).
 
 
 - **Conversion function**:  
@@ -112,7 +112,7 @@ MIT License — free to use, modify, and distribute. See `LICENSE` for details.
 
 > **Примітка 1:** Суфікси `i`, `b` або `z` у назві файлу шрифту означають **italic**, **bold** або **italic bold** стиль.  
 > **Примітка 2:** Цифра в назві файлу шрифту означає **розмір шрифту**.  
-> **Примітка 3:** На малих розмірах шрифтів можуть з’являтися невеликі артефакти. Ви можете підправити шрифти на свій смак, використовуючи онлайн-інструменти, такі як [Adafruit GFX Pixel Font Customiser](https://oleddisplay.squix.ch/#/home).
+> **Примітка 3:** На малих розмірах шрифтів можуть з’являтися невеликі артефакти. Ви можете підправити шрифти на свій смак, використовуючи онлайн-інструменти, такі як [Adafruit GFX Pixel Font Customiser](https://tchapi.github.io/Adafruit-GFX-Font-Customiser/).
 
 
 - **Функція перетворення**:  
