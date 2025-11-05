@@ -6,7 +6,7 @@
 
 **Ukr_GFX_fonts** is a collection of fonts with Ukrainian character support for GFX libraries (Adafruit GFX, Arduino GFX) and a helper function to convert UTF-8 strings with Ukrainian letters into font codes.
 
-### Library Compatibility / Сумісність з бібліотеками
+### Library Compatibility
 
 | Library                           | Compatibility | Notes                              |
 |----------------------------------|---------------|------------------------------------|
@@ -36,6 +36,11 @@
 - **Conversion function**:  
   - `Utf8win1251(const char* source)` — converts a UTF-8 string into font codes using a replacement table.  
   - Used to display Ukrainian letters via GFX.
+
+⚠️ **Important:** The **LovyanGFX** library uses an internal string re-encoding algorithm. For the function to work correctly, you must explicitly specify the following in `setup`:
+```cpp
+gfx.setAttribute(lgfx::attribute::utf8_switch, false);
+```
 
 ### Usage
 
@@ -118,6 +123,11 @@ MIT License — free to use, modify, and distribute. See `LICENSE` for details.
 - **Функція перетворення**:  
   - `Utf8win1251(const char* source)` — перетворює UTF-8 рядок у коди шрифта, використовуючи таблицю замін.  
   - Використовується для відображення українських символів через GFX.
+
+⚠️ **Важливо:** Бібліотека **LovyanGFX** використовує внутрішній алгоритм перекодування рядків. Щоб функція працювала коректно, необхідно явно вказати наступне у `setup`:
+```cpp
+gfx.setAttribute(lgfx::attribute::utf8_switch, false);
+```
 
 ### Підключення
 
