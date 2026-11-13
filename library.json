@@ -1,0 +1,52 @@
+{
+  "name": "Ukr_GFX_fonts",
+  "version": "1.0.1",
+  "description": "Collection of GFX-compatible fonts with Ukrainian character support and a UTF-8 to GFX code conversion helper.",
+  "keywords": [
+    "ukrainian",
+    "cyrillic",
+    "gfx",
+    "adafruit",
+    "arduino_gfx",
+    "lovyangfx",
+    "tft_espi",
+    "fonts",
+    "utf-8",
+    "display",
+    "tahoma",
+    "cambria",
+    "freesans"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/igor-gia/Ukr_GFX_fonts"
+  },
+  "authors": [
+    {
+      "name": "Igor Gimelfarb",
+      "email": "gia@gia.org.ua",
+      "url": "https://github.com/igor-gia",
+      "maintainer": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/igor-gia/Ukr_GFX_fonts",
+  "frameworks": [
+    "arduino"
+  ],
+  "platforms": [
+    "*"
+  ],
+  "headers": [
+    "utils.h"
+  ],
+  "export": {
+    "include": [
+      "src/*",
+      "examples/*",
+      "library.properties",
+      "README.md",
+      "LICENSE"
+    ]
+  }
+}
