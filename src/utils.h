@@ -1,61 +1,72 @@
 #pragma once
 #include <Arduino.h>
-#include <stdint.h>
-#include <string.h>
-#include <stdbool.h>
 
-#define MAX_STRING 270  // ограничиваем строку шириной экрана
+// Функция перекодировки UTF-8 в коды шрифта
+inline String Utf8win1251(const char* source) {
+    String result = "";
+    if (!source) return result;
 
-// Глобальный буфер для преобразованных строк
-char target[MAX_STRING + 1] = "";
+    // Резервируем память, чтобы избежать фрагментации кучи
+    result.reserve(strlen(source)); 
 
-// Таблица замены UTF-8 -> код шрифта
-struct UTF8Replace {
-    uint8_t firstByte;    // первый байт UTF-8
-    uint8_t secondByte;   // второй байт UTF-8
-    uint8_t replacement;  // код для шрифта
-};
+    int i = 0;
+    while (source[i]) {
+        uint8_t first = source[i++];
+        
+        // 1-байтовый символ (ASCII: 0xxxxxxx)
+        if ((first & 0x80) == 0) {  
+            result += (char)first;
+            continue;
+        }
+        
+        // 2-байтовый символ (Кириллица: 110xxxxx)
+        if ((first & 0xE0) == 0xC0) {
+            if (!source[i]) break; // Защита от внезапного конца строки
+            uint8_t second = source[i++];
+            uint8_t n = second; // По умолчанию используем второй байт
 
-const UTF8Replace replacements[] = {
-    {208, 129, 192},  // Ё
-    {209, 145, 193},  // ё
-    {208, 132, 194},  // Є
-    {209, 148, 195},  // є
-    {208, 134, 196},  // І
-    {209, 150, 197},  // і
-    {208, 135, 198},  // Ї
-    {209, 151, 199},  // ї
-    {210, 144, 200},  // Ґ
-    {210, 145, 201}   // ґ
-};
-const int replacementsCount = sizeof(replacements) / sizeof(replacements[0]);
-
-// Функция преобразования UTF-8 строки в коды шрифта
-inline char* Utf8win1251(const char* source) {
-    strcpy(target, "");  // очищаем буфер
-    int i = 0, j = 0;
-    while (source[i] && j < MAX_STRING) {
-        unsigned char first = source[i++];
-        unsigned char n = first;
-
-        if (first >= 127) {  // двухбайтовый UTF-8
-            unsigned char second = source[i++];
-            bool replaced = false;
-            for (int k = 0; k < replacementsCount; k++) {
-                if (replacements[k].firstByte == first && replacements[k].secondByte == second) {
-                    n = replacements[k].replacement;
-                    replaced = true;
-                    break;
+            // Быстрая замена украинских и спец. букв
+            if (first == 208) {
+                switch (second) {
+                    case 129: n = 192; break; // Ё
+                    case 132: n = 194; break; // Є
+                    case 134: n = 196; break; // І
+                    case 135: n = 198; break; // Ї
+                }
+            } else if (first == 209) {
+                switch (second) {
+                    case 145: n = 193; break; // ё
+                    case 148: n = 195; break; // є
+                    case 150: n = 197; break; // і
+                    case 151: n = 199; break; // ї
+                }
+            } else if (first == 210) {
+                switch (second) {
+                    case 144: n = 200; break; // Ґ
+                    case 145: n = 201; break; // ґ
                 }
             }
-            if (!replaced) {
-                n = second;  // используем второй байт как индекс шрифта
-            }
+            
+            result += (char)n;
+            continue;
         }
-
-        target[j++] = n;
+        
+        // 3-байтовый символ (1110xxxx) - например, знак евро или градуса
+        if ((first & 0xF0) == 0xE0) {
+            if (source[i]) i++; // пропускаем 2-й байт
+            if (source[i]) i++; // пропускаем 3-й байт
+            // В шрифт не пишем, просто идем дальше
+            continue; 
+        }
+        
+        // 4-байтовый символ (11110xxx) - например, эмодзи
+        if ((first & 0xF8) == 0xF0) {
+            if (source[i]) i++; // пропускаем 2-й байт
+            if (source[i]) i++; // пропускаем 3-й байт
+            if (source[i]) i++; // пропускаем 4-й байт
+            // В шрифт не пишем, просто идем дальше
+            continue; 
+        }
     }
-    target[j] = '\0';
-    return target;
+    return result;
 }
-
